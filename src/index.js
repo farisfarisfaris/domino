@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger');
 const { initDominoKeys, getDominoPublicKeyBase64 } = require('./crypto/keys');
 
 // Initialize Domino's signing key pair
@@ -26,6 +28,16 @@ app.use('/consent', consentRouter);
 app.use('/interaction', interactionRouter);
 app.use('/receipt', receiptRouter);
 
+// API Documentation
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'Domino API Docs',
+}));
+app.get('/docs.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
 // Public key endpoint
 app.get('/domino/public-key', (req, res) => {
   res.status(200).json({
@@ -50,5 +62,7 @@ app.listen(PORT, () => {
   console.log(`    POST /receipt/generate`);
   console.log(`    POST /receipt/verify`);
   console.log(`    GET  /health`);
-  console.log(`    GET  /domino/public-key\n`);
+  console.log(`    GET  /domino/public-key`);
+  console.log(`    GET  /docs              — Swagger UI`);
+  console.log(`    GET  /docs.json         — OpenAPI spec\n`);
 });
