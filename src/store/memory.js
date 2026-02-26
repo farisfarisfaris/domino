@@ -3,6 +3,8 @@ const agentsByName = new Map();
 const handshakes = new Map();
 const sessions = new Map();
 const receipts = new Map();
+const handshakeEvents = new Map();
+const scopeViolations = new Map();
 
 // Agents
 function storeAgent(agent) {
@@ -76,6 +78,41 @@ function getReceipt(receiptId) {
   return receipts.get(receiptId) || null;
 }
 
+// Collection iterators (for admin endpoints)
+function getAllAgents() {
+  return Array.from(agents.values());
+}
+
+function getAllHandshakes() {
+  return Array.from(handshakes.values());
+}
+
+function getAllSessions() {
+  return Array.from(sessions.values());
+}
+
+function getAllReceipts() {
+  return Array.from(receipts.values());
+}
+
+// Handshake event log (tracks all attempts including failures)
+function logHandshakeEvent(event) {
+  handshakeEvents.set(event.event_id, event);
+}
+
+function getAllHandshakeEvents() {
+  return Array.from(handshakeEvents.values());
+}
+
+// Scope violation log (tracks blocked actions)
+function logScopeViolation(violation) {
+  scopeViolations.set(violation.violation_id, violation);
+}
+
+function getAllScopeViolations() {
+  return Array.from(scopeViolations.values());
+}
+
 module.exports = {
   storeAgent,
   getAgent,
@@ -91,4 +128,12 @@ module.exports = {
   getActiveSessionCount,
   storeReceipt,
   getReceipt,
+  getAllAgents,
+  getAllHandshakes,
+  getAllSessions,
+  getAllReceipts,
+  logHandshakeEvent,
+  getAllHandshakeEvents,
+  logScopeViolation,
+  getAllScopeViolations,
 };

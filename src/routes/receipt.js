@@ -41,7 +41,7 @@ router.post('/generate', async (req, res) => {
 
     // Close the session
     const closedAt = new Date().toISOString();
-    store.updateSession(session_id, { status: 'closed' });
+    store.updateSession(session_id, { status: 'closed', closed_at: closedAt });
 
     // Look up agent details
     const initiator = store.getAgent(session.initiator_agent_id);

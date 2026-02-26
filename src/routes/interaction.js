@@ -51,6 +51,17 @@ router.post('/record', async (req, res) => {
 
         // Check excluded actions
         if (payload.excluded && payload.excluded.includes(action)) {
+          const actingAgent = store.getAgent(agent_id);
+          store.logScopeViolation({
+            violation_id: `sv_${crypto.randomBytes(4).toString('hex')}`,
+            timestamp: new Date().toISOString(),
+            session_id,
+            agent_id,
+            agent_name: actingAgent ? actingAgent.agent_name : null,
+            attempted_action: action,
+            scope: session.scope,
+            result: 'blocked',
+          });
           return res.status(403).json({
             recorded: false,
             within_scope: false,

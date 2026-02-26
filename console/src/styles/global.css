@@ -1,0 +1,122 @@
+:root {
+  /* Backgrounds */
+  --bg-primary: #08080F;
+  --bg-panel: #0D0D1A;
+  --bg-elevated: #111122;
+
+  /* Text */
+  --text-primary: #E8E4F0;
+  --text-secondary: #9994A8;
+  --text-muted: #5C5775;
+
+  /* Brand */
+  --purple: #7B2FF2;
+  --purple-glow-bg: rgba(123, 47, 242, 0.15);
+  --purple-glow-border: rgba(123, 47, 242, 0.5);
+  --purple-subtle: rgba(123, 47, 242, 0.04);
+
+  /* Status */
+  --success: #2DD4A0;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --info: #60A5FA;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-emphasis: rgba(255, 255, 255, 0.1);
+
+  /* Typography */
+  --font-sans: 'Geist Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', monospace;
+
+  /* Sizes */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+
+  /* Layout */
+  --topbar-height: 48px;
+  --sidebar-width: 220px;
+  --sidebar-collapsed: 64px;
+  --statusbar-height: 32px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--purple);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+
+input, select {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-emphasis);
+  border-radius: 6px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+input:focus, select:focus {
+  border-color: var(--purple);
+}
+input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+/* Dot grid background for main content */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

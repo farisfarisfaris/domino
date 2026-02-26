@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
@@ -20,6 +21,7 @@ const healthRouter = require('./routes/health');
 const consentRouter = require('./routes/consent');
 const interactionRouter = require('./routes/interaction');
 const receiptRouter = require('./routes/receipt');
+const adminRouter = require('./routes/admin');
 
 app.use('/agents', agentsRouter);
 app.use('/handshake', handshakeRouter);
@@ -27,6 +29,7 @@ app.use('/health', healthRouter);
 app.use('/consent', consentRouter);
 app.use('/interaction', interactionRouter);
 app.use('/receipt', receiptRouter);
+app.use('/admin', adminRouter);
 
 // API Documentation
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
@@ -63,6 +66,7 @@ app.listen(PORT, () => {
   console.log(`    POST /receipt/verify`);
   console.log(`    GET  /health`);
   console.log(`    GET  /domino/public-key`);
+  console.log(`    GET  /admin/*           — Admin Console API (requires auth)`);
   console.log(`    GET  /docs              — Swagger UI`);
   console.log(`    GET  /docs.json         — OpenAPI spec\n`);
 });
